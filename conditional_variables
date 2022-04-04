@@ -1,0 +1,14 @@
+provider "aws" {
+  region = "ap-south-1"
+}
+variable "environment" {}
+resource "aws_instance" "dev" {
+  ami           = "ami-04893cdb768d0f9ee"
+  instance_type = "t2.micro"
+  count         = var.environment == "dev" ? 1 : 0
+}
+resource "aws_instance" "stagging" {
+  ami           = "ami-04893cdb768d0f9ee"
+  instance_type = "t2.medium"
+  count         = var.environment == "stagging" ? 1 : 0
+}
